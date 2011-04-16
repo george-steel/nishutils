@@ -1,0 +1,25 @@
+This is an XKB/XCompose based input method for Anishinabemowin syllabics.
+It will work with anything that uses XIM (most programs if given the proper enviornment variables).
+
+The layout here is the same as Chris Harvey's Anishininimowin Right Dot keyboard available at
+http://languagegeek.com/algon/syllabics_keyboards/cr_oj_oc_na.html
+
+
+TO INSTALL
+----------
+
+    # cp nish /usr/share/X11/xkb/symbols/
+    $ cp XCompose ~/.XCompose
+
+If you already have a .XCompose file, add everything after the first line to your current one.
+To use this layout you need to set the enviornment variable
+
+    GTK_IM_MODULE="xim"
+
+and run the command
+
+    $ setxkbmap "us,nish" -option "compose:menu,grp:caps_toggle"
+
+Caps Lock will now switch between latin (US with compose key here, but can be changed) and syllabics.
+
+
