@@ -6,68 +6,65 @@
 // 
 // Created by George Steel <george.steel@gmail.com>
 //
-// This layout emits the "E" series characters and finals.
-// XCompose well eat the E characters emitted here and produce the full
-// variety of characters wfter a vowel is pressed.
-// I originally used non-functional keycodes in the 0x0200xxxx range 
-// on a Gentoo mavhine but Debian's XCompose would not recognize these.
-// I realize my current solution is a bit of a hack.
-partial alphanumeric_keys
-xkb_symbols "basic" {
+// Uses the keysym range 0xe0xx (presently unallocated) for dead keys to go with the XCompose file.
+// The lower nibble reperesents the consonants (in the order null,p,t,k,c,m,n,s,sh,y,l,r,th,v)
+// adding 16 for right w-dot and 32 for left w-dot
+default partial alphanumeric_keys
+xkb_symbols "lg-poly-rw" {
     name[Group1] = "Anishinaabemowin - Syllabics (Languagegeek layout)";
 
-    key <TLDE>  { [     U144A             ] };
-    key <AE01>  { [         1,     exclam ] };
-    key <AE02>  { [         2,         at ] };
-    key <AE03>  { [         3, numbersign ] };
-    key <AE04>  { [         4,     dollar,         cent ] };
-    key <AE05>  { [         5,    percent ]     };
-    key <AE06>  { [         6,   question ] };
-    key <AE07>  { [         7,  ampersand, U2018 ]   };
-    key <AE08>  { [         8,   asterisk, U2019 ]   };
-    key <AE09>  { [         9,  parenleft, U00AB, U2039 ]   };
-    key <AE10>  { [         0, parenright, U00BB, U203A ]   };
-    key <AE11>  { [     U153E             ] }; //Y final
-    key <AE12>  { [     minus,      U1400 ] };
+    key <TLDE>  { [ U144A ] };
+    key <AE01>  { [ 1, exclam ] };
+    key <AE02>  { [ 2, at ] };
+    key <AE03>  { [ 3, numbersign ] };
+    key <AE04>  { [ 4, dollar, cent ] };
+    key <AE05>  { [ 5, percent ]     };
+    key <AE06>  { [ 6, question ] };
+    key <AE07>  { [ 7, ampersand, U2018 ]   };
+    key <AE08>  { [ 8, asterisk, U2019 ]   };
+    key <AE09>  { [ 9, parenleft, U00AB, U2039 ]   };
+    key <AE10>  { [ 0, parenright, U00BB, U203A ]   };
+    key <AE11>  { [ U153E ] }; //Y final
+    key <AE12>  { [ minus, U1400 ] };
 
-    key <AD01>  { [     U1424             ] }; //W final
-    key <AD02>  { [     U140d,      U1424 ] }; //W
-    key <AD03>  { [     U1401,      U141E ] }; //E
-    key <AD04>  { [     U1458,      U1552 ] }; //TW R
-    key <AD05>  { [     U144c,      U141F ] }; //T
-    key <AD06>  { [     U1526,      U153E ] }; //Y
-    key <AD07>  { [     U1530             ] }; //YW
-    key <AD08>  { [     U1403,      U1404 ] }; //I
-    key <AD09>  { [     U1405,      U1406 ] }; //O
-    key <AD10>  { [     U142f,      U144A ] }; //P
-    key <AD11>  { [     U143b,      U201C, bracketleft, braceleft ]  }; //PW “
-    key <AD12>  { [     U1428,      U201D, bracketright, braceright ]  }; // c final ”
+    key <AD01>  { [ U1424 ] }; //Q - W final
+    key <AD02>  { [ 0xe010, U1424 ] }; //W
+    key <AD03>  { [ U1401, U141E ] }; //E
+    key <AD04>  { [ 0xe00b, U1552 ] }; //R - TW, R final
+    key <AD05>  { [ 0xe002, U141F ] }; //T
+    key <AD06>  { [ 0xe009, U153E ] }; //Y
+    key <AD07>  { [ ] }; //U - YW
+    key <AD08>  { [ U1403, U1404 ] }; //I
+    key <AD09>  { [ U1405, U1406 ] }; //O
+    key <AD10>  { [ 0xe001, U144A ] }; //P
+    key <AD11>  { [ 0xe011, U201C, bracketleft, braceleft ]  }; //[ - PW “
+    key <AD12>  { [ U1428, U201D, bracketright, braceright ]  }; //] - c final ”
 
-    key <AC01>  { [     U140A,      U140B ] }; //A
-    key <AC02>  { [     U14ed,      U1422 ] }; //S
-    key <AC03>  { [     U14f9,      U155e ] }; //SW TH
-    key <AC04>  { [     U1510,      U1421 ] }; //SH L
-    key <AC05>  { [     U1518             ] }; //SHW
-    key <AC06>  { [     U1426             ] }; //H final
-    key <AC07>  { [     U1475             ] }; //KW
-    key <AC08>  { [     U146b,      U1420 ] }; //K
-    key <AC09>  { [     U1423,      U14EC ] }; //N final
-    key <AC10>  { [     U1420             ] }; //K final
-    key <AC11>  { [     U141F             ] }; //T final
-    key <BKSL>  { [     U14BC,  backslash ] }; //M final
+    key <AC01>  { [ U140A, U140B ] }; //A
+    key <AC02>  { [ 0xe007, U1422 ] }; //S
+    key <AC03>  { [ 0xe017, 0xe00c ] }; //D - SW TH
+    key <AC04>  { [ 0xe008, U1421 ] }; //F - SH
+    key <AC05>  { [ 0xe018 ] }; //G - SHW
+    key <AC06>  { [ U1426 ] }; //H final
+    key <AC07>  { [ 0xe013  ] }; //J - KW
+    key <AC08>  { [ 0xe003, U1420 ] }; //K
+    key <AC09>  { [ U1423, U14EC ] }; //L - N final, L
+    key <AC10>  { [ U1420             ] }; //; - K final
+    key <AC11>  { [ U141F             ] }; //' - T final
+    key <BKSL>  { [ U14BC, backslash ] }; //\ - M final
 
-    key <AB01>  { [     U1422             ] }; //S final
-    key <AB02>  { [     U1421,      U157D ] }; //SH final
-    key <AB03>  { [     U1489,      U1428 ] }; //C
-    key <AB04>  { [     U1493,      U1553 ] }; //CW V
-    key <AB05>  { [     U14ca             ] }; //NW
-    key <AB06>  { [     U14c0,      U1423 ] }; //N
-    key <AB07>  { [     U14a3,      U14BC ] }; //M
-    key <AB08>  { [     comma             ] };
-    key <AB09>  { [     U166E             ] };
-    key <AB10>  { [     U14ad,   question ] }; //MW
+    key <AB01>  { [ U1422  ] }; //Z - S final
+    key <AB02>  { [ U1421, U157D ] }; //X - SH final
+    key <AB03>  { [ 0xe004, U1428 ] }; //C
+    key <AB04>  { [ 0xe0074, 0xe00d ] }; //V - CW V
+    key <AB05>  { [ 0xe016 ] }; //B - NW
+    key <AB06>  { [ 0xe006, U1423 ] }; //N
+    key <AB07>  { [ 0xe005, U14BC ] }; //M
+    key <AB08>  { [ comma ] }; //,
+    key <AB09>  { [ U166E ] }; //.
+    key <AB10>  { [ 0xe015, question ] }; /// - MW
 
-    key <SPCE>  { [     space             ] };
+    key <SPCE>  { [ space ] };
 
     include "level3(ralt_switch)"
 };
