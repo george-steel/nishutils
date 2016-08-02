@@ -1,3 +1,4 @@
+#! /usr/bin/env runhaskell
 module UnFierro (unfierro) where
 
 unfierro :: String -> String
