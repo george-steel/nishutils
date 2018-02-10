@@ -8,8 +8,10 @@ http://languagegeek.com/algon/syllabics_keyboards/cr_oj_oc_na.html
 TO INSTALL
 ----------
 
-    # cp nish /usr/share/X11/xkb/symbols/
-    $ cp XCompose ~/.XCompose
+``` bash
+sudo cp nish /usr/share/X11/xkb/symbols/
+cp XCompose ~/.XCompose
+```
 
 If you already have a .XCompose file, add everything after the first line to your current one.
 To use this layout you need to set the enviornment variable
@@ -18,7 +20,7 @@ To use this layout you need to set the enviornment variable
 
 and run the command
 
-    $ setxkbmap "us,nish" -option "compose:menu,grp:caps_toggle"
+    setxkbmap "us,nish" -option "compose:menu,grp:caps_toggle"
 
 Caps Lock will now switch between latin (US with compose key here, but can be changed) and syllabics.
 
